@@ -23,6 +23,6 @@ urlpatterns = [
 
     path('zilo/choose', views.choose, name = 'choose'),
 
-    path('zilo/signin', views.signin, name= 'sigin'),
+    path('zilo/signin', views.signin, name= 'signin'),
     path('zilo/signup', views.signup, name= 'signup'),
 ]

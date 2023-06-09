@@ -5,8 +5,9 @@ from django.db import models
 # from django.contrib.auth.models import AbstractUser
 
 class AdminUser(AbstractUser):
+    full_names = models.CharField(max_length=60)
     mobile_number = models.CharField(max_length=20)
-    city = models.CharField(max_length=100)
+    city = models.CharField(max_length=50, choices=(('Bamenda', 'Bamenda'), ('Douala', 'Douala'), ('Yaounde', 'Yaounde'), ('Buea', 'Buea')))
 
 class Blog(models.Model):
     title = models.CharField(max_length = 50)

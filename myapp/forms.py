@@ -1,7 +1,9 @@
 from django import forms
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class BlogForm(forms.ModelForm):
     class Meta:
@@ -11,11 +13,12 @@ class BlogForm(forms.ModelForm):
 
 class SignupForm(UserCreationForm):
     
+    full_names = forms.CharField(max_length=60)
     email = forms.EmailField(required=True)
     mobile_number = forms.CharField(required=True)
-    city = forms.CharField(required=True)
-    
+    city = models.CharField(max_length=50, choices=(('Bamenda', 'Bamenda'), ('Douala', 'Douala'), ('Yaounde', 'Yaounde'), ('Buea', 'Buea')))
     username = forms.CharField(help_text='', max_length=150)
+    
     password1 = forms.CharField(help_text='', strip=False, widget=forms.PasswordInput)
     password2 = forms.CharField(help_text='', strip=False, widget=forms.PasswordInput)
 

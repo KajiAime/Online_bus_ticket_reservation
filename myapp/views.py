@@ -4,7 +4,7 @@ from .forms import *
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-
+from .backend import CustomBackend
 
 # Create your views here.
 
@@ -27,12 +27,16 @@ def signin(request):
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
+        city = request.POST.get('city')
         
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, username=username, password=password, city=city, backend='myapp.backend.CustomBackend')
+        
         if user is not None:
             login(request, user)
+            
+            return redirect('blog')
+        else:
             return redirect('/')
-        
     return render(request, 'admin_login/signin.html')
 
 def index(request):

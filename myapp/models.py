@@ -1,13 +1,15 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.core.validators import validate_slug
+
 
 # Create your models here.
 # from django.contrib.auth.models import AbstractUser
 
-class AdminUser(AbstractUser):
+class Custom(AbstractUser):
     full_names = models.CharField(max_length=60)
     mobile_number = models.CharField(max_length=20)
-    city = models.CharField(max_length=50, choices=(('Bamenda', 'Bamenda'), ('Douala', 'Douala'), ('Yaounde', 'Yaounde'), ('Buea', 'Buea')))
+    city = models.CharField(max_length=50, choices=(('Bamenda', 'Bamenda'), ('Douala', 'Douala'), ('Yaounde', 'Yaounde'), ('Buea', 'Buea')), validators=[validate_slug])
 
 class Blog(models.Model):
     title = models.CharField(max_length = 50)

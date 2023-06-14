@@ -23,22 +23,25 @@ def signup(request):
     return render(request,'admin_login/signup.html', context)
 
 
+# def signin(request):x
+    
 def signin(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
         city = request.POST.get('city')
         
-        user = authenticate(request, username=username, password=password, city=city, backend='myapp.backend.CustomBackend')
-        
+        user = authenticate(request, username=username, password=password, city=city)
         if user is not None:
             login(request, user)
-            
+            # Redirect to a success page.
             return redirect('blog')
         else:
             return redirect('/')
-    return render(request, 'admin_login/signin.html')
-
+    else:
+        return render(request, 'admin_login/signin.html')
+        
+        
 def index(request):
     chooses =Choose.objects.all()
     latest_blogs = Blog.objects.order_by('-date_created')[:3]

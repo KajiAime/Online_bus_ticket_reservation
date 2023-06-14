@@ -61,9 +61,8 @@ MIDDLEWARE = [
     
 ]
 
-
 AUTHENTICATION_BACKENDS = [
-    'myapp.backend.CustomBackend',
+    'myapp.authentication.AdminUserBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
@@ -150,3 +149,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'myapp.AdminUser'
+# AUTH_USER_MODEL = 'myapp.CustomUser'
